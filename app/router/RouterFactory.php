@@ -11,7 +11,7 @@
 
 		public static function createRouter() : RouteList {
 			$router = new RouteList;
-			$router[] = new Route('[<module>/]<presenter>/<action>[/<id>]', 'Homepage:default');
+			$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 			return $router;
 		}
 

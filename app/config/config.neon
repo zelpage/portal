@@ -3,7 +3,7 @@ parameters:
 application:
 	errorPresenter: Error
 	mapping:
-		*: ZelPage\*Module\*Presenter
+		*: ZelPage\*Presenter
 
 session:
 	expiration: 14 days
@@ -15,6 +15,11 @@ database:
 	dsn: @env::get('DB_DSN', 'mysql:host=127.0.0.1;dbname=berta_zelpage')
 	user: @env::get('DB_USER', 'berta_zelpage')
 	password: @env::get('DB_PASS', 'berta_zelpage')
+	debugger: false
+	options:
+		lazy: yes
 
 services:
 	router: ZelPage\RouterFactory::createRouter
+	- ZelPage\CalendarService
+	- ZelPage\OrganizerFormFactory

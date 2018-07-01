@@ -1,0 +1,38 @@
+{block title}Administrace Kalendáře akcí{/block}
+
+{block content}
+<h1>Pořadatelé akcí</h1>
+
+<p>Filtr pořadatelů {foreach $organizerTypes as $otId => $otName}<a href="{link Organizer:default $otId}">{$otName}</a>{sep}, {/sep}{/foreach} (<a href="{link Organizer:default}">vše</a>)</p>
+
+<p><a href="{link Organizer:new}">Přidat pořadatele</a></p>
+
+{foreach $organizers as $organizer}
+{first}
+<table class="table table-sm table-hover">
+<thead class="thead-inverse">
+<tr>
+<th>#</th>
+<th>Název, adresa, www</th>
+<th colspan="2">Typ</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+{/first}
+
+<tr>
+<td>{$organizer->getId()}</td>
+<td><strong>{$organizer->getName()}</strong>{if $organizer->hasAddress()}<br>{$organizer->getAddress()}{/if}{if $organizer->hasWww()}<br><a href="{$organizer->getWww()}">{$organizer->getWww()}</a>{/if}</td>
+<td>{$organizer->getType()}</td>
+<td>
+{foreach $organizer->getTypes() as $t}
+{$organizerTypes[$t]} {sep}<br>{/sep}
+{/foreach}
+</td>
+<td><a href="{link Organizer:edit $organizer->getId()}">Editovat</a> <a href="{link Organizer:delete $organizer->getId()}">Smazat</a></td>
+</tr>
+
+{last}</table>{/last}
+{/foreach}
+{/block}
