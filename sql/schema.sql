@@ -25,3 +25,19 @@ CREATE TABLE `kalendar_spolky` (
 	PRIMARY KEY (`id`),
 	KEY `seo_url` (`seo_url`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+CREATE TABLE `kalendar_vozidla` (
+	`id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+	`jmeno` varchar(40) COLLATE utf8_czech_ci DEFAULT NULL,
+	`typ` smallint(5) DEFAULT NULL,
+	`seo_url` varchar(40) COLLATE utf8_czech_ci DEFAULT NULL,
+	`link_atlas` varchar(255) COLLATE utf8_czech_ci DEFAULT NULL,
+	`link_galerie` varchar(255) COLLATE utf8_czech_ci DEFAULT NULL,
+	`active` tinyint(1) DEFAULT '1',
+	`modified` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+	`uiccode` varchar(9) COLLATE utf8_czech_ci DEFAULT NULL,
+	`zeme` tinyint(2) DEFAULT '54',
+	`cat` enum('r','v','u','w','s') COLLATE utf8_czech_ci DEFAULT 'v',
+	PRIMARY KEY (`id`),
+	KEY `seo_url` (`seo_url`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;

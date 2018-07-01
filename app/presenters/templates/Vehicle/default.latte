@@ -1,0 +1,40 @@
+{block title}Administrace Kalendáře akcí{/block}
+
+{block content}
+<h1>Vozidla</h1>
+
+<p><a href="{link Vehicle:new}">Přidat vozidlo</a></p>
+
+{foreach $vehicles as $vehicle}
+{first}
+<table class="table table-sm table-hover">
+<thead class="thead-inverse">
+<tr>
+<th>#</th>
+<th>Typ</th>
+<th>Název</th>
+<th>UIC kód</th>
+<th>UIC země</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+{/first}
+
+<tr>
+<td>{$vehicle->getId()}</td>
+<td></td>
+<td>{$vehicle->getName()}</td>
+<td>{$vehicle->getUicCode()}</td>
+<td>{$vehicle->getUicCountry()}</td>
+<td>
+{if $vehicle->hasLinkAtlas()}<a href="{$vehicle->getLinkAtlas()}">A</a>{/if} {if $vehicle->hasLinkGallery()}<a href="{$vehicle->getLinkGallery()}">G</a>{/if}
+</td>
+<td><a href="{link Vehicle:edit $vehicle->getId()}">Editovat</a> <a href="{link Vehicle:delete $vehicle->getId()}">Smazat</a></td>
+</tr>
+
+{last}</table>{/last}
+{/foreach}
+
+{block}

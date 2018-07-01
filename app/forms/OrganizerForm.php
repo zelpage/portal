@@ -48,6 +48,7 @@
 				->setAttribute('placeholder', 'https://facebook.com/novak');
 			$this->addText('dopravce', 'číslo licence dopravce')
 				->addRule(Form::MAX_LENGTH, 'Číslo dopravce má max. délku 6 znaků', 6)
+				->setRequired(FALSE)
 			;
 			$this->addText('foundingDate', 'datum registrace')
 				->setType('date')
@@ -57,11 +58,7 @@
 				->setRequired(FALSE);
 			$this->addCheckboxList('typ', 'typ pořadatele')
 				->getSeparatorPrototype()->setName(NULL);
-			$this->addRadioList('active', 'Aktivní ve výběru', [
-				1 => 'ANO',
-				0 => 'NE',
-			])
-				->getSeparatorPrototype()->setName(NULL);
+			$this->addCheckbox('active', 'Aktivní ve výběru');
 
 			$this->addSubmit('ok', 'OK');
 		}

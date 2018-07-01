@@ -6,9 +6,19 @@
 
 	use \Nette\Configurator;
 
+	$isDevMachine = in_array(getenv('COMPUTERNAME'), array(
+		'FORTEZZA',
+		'HUMBLEHORNET',
+		'HUNDERTHAF',
+		'MATOUSDANIELKA',
+	));
+
 	$configurator = new Configurator;
 
-	//$configurator->setDebugMode('23.75.345.200'); // enable for your remote IP
+	$environment = Configurator::detectDebugMode($isDevMachine)
+		? 'development' : 'production';
+	$configFile = "/config/config.{$environment}.neon";
+
 	$configurator->enableTracy(__DIR__ . '/../log');
 
 	$configurator->setTimeZone('Europe/Prague');
@@ -19,7 +29,7 @@
 		->register();
 
 	$configurator->addConfig(__DIR__ . '/config/config.neon');
-	$configurator->addConfig(__DIR__ . '/config/config.local.neon');
+	$configurator->addConfig(__DIR__ . $configFile);
 
 	$container = $configurator->createContainer();
 

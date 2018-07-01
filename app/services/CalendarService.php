@@ -36,7 +36,7 @@
 				'taxId' => $org->hasTaxId() ? $org->getTaxId() : NULL,
 				'foundingDate' => $org->hasFoundingDate() ? $org->getFoundingDate() : NULL,
 				'dissolutionDate' => $org->hasDissolutionDate() ? $org->getDissolutionDate() : NULL,
-				'typ' => self::zipOrganizerTypes($org->getTypes()),
+				'typ' => self::zipTypes($org->getTypes()),
 				'seo_url' => Strings::webalize($org->getName()),
 				'active' => $org->isActive(),
 			]);
@@ -44,8 +44,26 @@
 			return $org->setId($row->id);
 		}
 
+		public function addVehicle(Vehicle $v): Vehicle {
+			$row = $this->db->table('kalendar_vozidla')->insert([
+				'typ' => self::zipTypes($v->getType()),
+				'jmeno' => $v->getName(),
+				'link_atlas' => $v->getLinkAtlas(),
+				'link_galerie' => $v->getLinkGallery(),
+				'active' => $v->isActive(),
+				'uiccode' => $v->getUicCode(),
+				'zeme' => $v->getUicCountry(),
+			]);
+
+			return $v->setId($row->id);
+		}
+
 		public function deleteOrganizer(int $id) {
 			$this->db->table('kalendar_spolky')->where('id', $id)->delete();
+		}
+
+		public function deleteVehicle(int $id) {
+			$this->db->table('kalendar_vozidla')->where('id', $id)->delete();
 		}
 
 		public function editOrganizer(Organizer $org) : Organizer {
@@ -68,12 +86,27 @@
 				'taxId' => $org->hasTaxId() ? $org->getTaxId() : NULL,
 				'foundingDate' => $org->hasFoundingDate() ? $org->getFoundingDate() : NULL,
 				'dissolutionDate' => $org->hasDissolutionDate() ? $org->getDissolutionDate() : NULL,
-				'typ' => self::zipOrganizerTypes($org->getTypes()),
+				'typ' => self::zipTypes($org->getTypes()),
 				'seo_url' => Strings::webalize($org->getName()),
 				'active' => $org->isActive(),
 			]);
 
 			return $org;
+		}
+
+		public function editVehicle(Vehicle $v): Vehicle {
+			$this->db->table('kalendar_spolky')->where('id', $v->getId())->update([
+				'typ' => self::zipTypes($v->getType()),
+				'jmeno' => $v->hasName() ? $v->getName() : NULL,
+				'seo_url' => $v->hasName() ? Strings::webalize($v->getName()) : NULL,
+				'link_atlas' => $v->hasLinkAtlas() ? $v->getLinkAtlas() : NULL,
+				'link_galerie' => $v->hasLinkGallery() ? $v->getLinkGallery() : NULL,
+				'active' => $v->isActive(),
+				'uiccode' => $v->hasUicCode() ? $v->getUicCode() : NULL,
+				'zeme' => $v->hasUicCountry() ? $v->getUicCountry() : NULL,
+			]);
+
+			return $v;
 		}
 
 		/**
@@ -86,6 +119,12 @@
 			return ($o === FALSE) ? NULL : self::mapToOrganizer($o);
 		}
 
+		public function findVehicleByID(int $id): ?Vehicle {
+			$v = $this->db->table('kalendar_vozidla')->where('id', $id)->fetch();
+
+			return ($v === FALSE) ? NULL : self::mapToVehicle($v);
+		}
+
 		/**
 		 * @return Organizer[]
 		 */
@@ -96,6 +135,16 @@
 				$orgs[$org->getId()] = $org;
 			}
 			return $orgs;
+		}
+
+		/** @return Vehicle[] */
+		public function findVehicles(): array {
+			$vehicles = [];
+			foreach ($this->db->table('kalendar_vozidla')->order('jmeno') as $v) {
+				$vehicle = self::mapToVehicle($v);
+				$vehicles[$vehicle->getId()] = $vehicle;
+			}
+			return $vehicles;
 		}
 
 		/**
@@ -116,7 +165,7 @@
 				->setId($org->id)
 				->setName($org->jmeno)
 				->setType($org->typ)
-				->setTypes(self::expandOrganizerTypes($org->typ))
+				->setTypes(self::expandTypes($org->typ))
 				->setActive($org->active)
 				->setSeoUrl($org->seo_url)
 				;
@@ -144,15 +193,34 @@
 			return $o;
 		}
 
-		private static function expandOrganizerTypes(int $type) : array {
+		private static function mapToVehicle($row): Vehicle {
+			$v = (new Vehicle())
+				->setId($row->id)
+				;
+
+			if (empty($row->jmeno) === FALSE) { $v->setName($row->jmeno); }
+			if (empty($row->typ) === FALSE) { $v->setType(self::expandTypes($row->typ)); }
+			if (empty($row->seo_url) === FALSE) { $v->setSeoUrl($row->seo_url); }
+			if (empty($row->link_atlas) === FALSE) { $v->setLinkAtlas($row->link_atlas); }
+			if (empty($row->link_galerie) === FALSE) { $v->setLinkGallery($row->link_galerie); }
+			if (empty($row->active) === FALSE) { $v->setActive(boolval($row->active)); }
+			if (empty($row->modified) === FALSE) { $v->setModified($row->modified); }
+			if (empty($row->uiccode) === FALSE) { $v->setUicCode($row->uiccode); }
+			if (empty($row->zeme) === FALSE) { $v->setUicCountry(intval($row->zeme)); }
+			if (empty($row->cat) === FALSE) { $v->setCat($row->cat); }
+
+			return $v;
+		}
+
+		private static function expandTypes(int $type) : array {
 			$types = [];
-			foreach ([1, 2, 4, 8, 16, 32] as $i) {
+			foreach ([1, 2, 4, 8, 16, 32, 1024, 2048, 4096, 8192, 16384] as $i) {
 				if ($type & $i) { $types[] = $i; }
 			}
 			return $types;
 		}
 
-		private static function zipOrganizerTypes(array $types) : int {
+		private static function zipTypes(array $types) : int {
 			$type = 0;
 			foreach ($types as $t) { $type |= $t; }
 			return $type;

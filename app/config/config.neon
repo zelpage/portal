@@ -23,3 +23,4 @@ services:
 	router: ZelPage\RouterFactory::createRouter
 	- ZelPage\CalendarService
 	- ZelPage\OrganizerFormFactory
+	- ZelPage\VehicleFormFactory
