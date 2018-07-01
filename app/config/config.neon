@@ -1,0 +1,20 @@
+parameters:
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: ZelPage\*Module\*Presenter
+
+session:
+	expiration: 14 days
+
+extensions:
+	env: wodCZ\NetteDotenv\DotEnvExtension
+
+database:
+	dsn: @env::get('DB_DSN', 'mysql:host=127.0.0.1;dbname=berta_zelpage')
+	user: @env::get('DB_USER', 'berta_zelpage')
+	password: @env::get('DB_PASS', 'berta_zelpage')
+
+services:
+	router: ZelPage\RouterFactory::createRouter

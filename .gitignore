@@ -1,0 +1,7 @@
+log/*
+!log/.htaccess
+!log/web.config
+temp/cache/*
+vendor/*
+.env
+composer.lock
