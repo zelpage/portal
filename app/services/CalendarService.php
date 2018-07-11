@@ -109,6 +109,16 @@
 			return $v;
 		}
 
+		/** @return Country[] */
+		public function findCountries(): array {
+			$countries = [];
+			foreach ($this->db->table('reg_zeme')->order('id') as $row) {
+				$c = self::mapToCountry($row);
+				$countries[$c->getId()] = $c;
+			}
+			return $countries;
+		}
+
 		/**
 		 * @param int $id
 		 * @return null|Organizer
@@ -192,6 +202,24 @@
 				$types[] = $t;
 			}
 			return $types;
+		}
+
+		private static function mapToCountry($row): Country {
+			$c = (new Country())
+				->setId($row->id)
+				->setName($row->jmeno)
+				;
+
+			if (empty($row->seo_url) === FALSE) { $c->setSeoHandle($row->seo_url); }
+			if (empty($row->zkratka) === FALSE) { $c->setAbbr($row->zkratka); }
+			if (empty($row->uiccode) === FALSE) { $c->setUicCode($row->uiccode); }
+			if (empty($row->en_name) === FALSE) { $c->setNameEn($row->en_name); }
+			if (empty($row->de_name) === FALSE) { $c->setNameDe($row->de_name); }
+			if (empty($row->fr_name) === FALSE) { $c->setNameFr($row->fr_name); }
+			if (empty($row->orig_name) === FALSE) { $c->setNameOrig($row->orig_name); }
+			if (empty($row->part) === FALSE) { $c->setContinent($row->part); }
+
+			return $c;
 		}
 
 		private static function mapToOrganizer($org) : Organizer {

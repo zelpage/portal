@@ -55,3 +55,20 @@ CREATE TABLE `kalendar_vozidla` (
 	PRIMARY KEY (`id`),
 	KEY `seo_url` (`seo_url`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+CREATE TABLE `reg_zeme` (
+	`id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+	`jmeno` varchar(50) COLLATE utf8_czech_ci DEFAULT NULL,
+	`seo_url` varchar(250) COLLATE utf8_czech_ci DEFAULT NULL,
+	`zkratka` varchar(3) COLLATE utf8_czech_ci DEFAULT NULL,
+	`uiccode` smallint(5) unsigned DEFAULT NULL,
+	`en_name` varchar(100) COLLATE utf8_czech_ci DEFAULT NULL,
+	`de_name` varchar(100) COLLATE utf8_czech_ci DEFAULT NULL,
+	`fr_name` varchar(100) COLLATE utf8_czech_ci DEFAULT NULL,
+	`orig_name` varchar(100) COLLATE utf8_czech_ci DEFAULT NULL,
+	`part` varchar(100) COLLATE utf8_czech_ci DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	KEY `regz_seo_url` (`seo_url`),
+	KEY `uiccode` (`uiccode`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci COMMENT='Seznam zemí pro odkazy a akce';
+
