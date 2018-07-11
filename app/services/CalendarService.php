@@ -160,6 +160,40 @@
 			return $orgs;
 		}
 
+		/** @return CalendarType[] */
+		public function findTypesOfConference(): array { return $this->findTypes('konf'); }
+
+		/** @return CalendarType[] */
+		public function findTypesOfFare(): array { return $this->findTypes('jizdne'); }
+
+		/** @return CalendarType[] */
+		public function findTypesOfRailEvent(): array { return $this->findTypes('zelakce'); }
+
+		/** @return CalendarType[] */
+		public function findTypesOfScaleKitExhibition(): array { return $this->findTypes('modvys'); }
+
+		/** @return CalendarType[] */
+		public function findTypesOfScaleKitSubject(): array { return $this->findTypes('modsubj'); }
+
+		/** @return CalendarType[] */
+		public function findTypesOfStatus(): array { return $this->findTypes('status'); }
+
+		/** @return CalendarType[] */
+		public function findTypesOfTraction(): array { return $this->findTypes('trakce'); }
+
+		/**
+		 * @param string $type
+		 * @return CalendarType[]
+		 */
+		private function findTypes(string $type): array {
+			$types = [];
+			foreach ($this->db->table('kalendar_typy')->where('typ = ?', $type)->order('typ_id') as $row) {
+				$t = self::mapToType($row);
+				$types[] = $t;
+			}
+			return $types;
+		}
+
 		private static function mapToOrganizer($org) : Organizer {
 			$o = (new Organizer())
 				->setId($org->id)
@@ -191,6 +225,23 @@
 			if (empty($org->modified) === FALSE) { $o->setModified($org->modified); }
 
 			return $o;
+		}
+
+		private static function mapToType($row): CalendarType {
+			$t = (new CalendarType())
+				->setId($row->id)
+				->setFlag($row->typ_id)
+				;
+
+			if (empty($row->typ) === FALSE) { $t->setType($row->typ); }
+			if (empty($row->obrazek) === FALSE) { $t->setImageUrl($row->obrazek); }
+			if (empty($row->obr_w) === FALSE) { $t->setImageWidth($row->obr_w); }
+			if (empty($row->obr_h) === FALSE) { $t->setImageHeight($row->obr_h); }
+			if (empty($row->p_lang) === FALSE) { $t->setAbbr($row->p_lang); }
+			if (empty($row->p_short) === FALSE) { $t->setShortName($row->p_short); }
+			if (empty($row->p_long) === FALSE) { $t->setLongName($row->p_long); }
+
+			return $t;
 		}
 
 		private static function mapToVehicle($row): Vehicle {

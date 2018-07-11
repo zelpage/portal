@@ -26,6 +26,20 @@ CREATE TABLE `kalendar_spolky` (
 	KEY `seo_url` (`seo_url`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
 
+CREATE TABLE `kalendar_typy` (
+	`id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+	`typ` enum('trakce','zelakce','modvys','konf','veletrh','kongres','status','jizdne','zobraz','modsubj') COLLATE utf8_czech_ci DEFAULT NULL,
+	`typ_id` smallint(5) unsigned NOT NULL,
+	`obrazek` varchar(255) COLLATE utf8_czech_ci DEFAULT NULL,
+	`obr_w` smallint(5) unsigned DEFAULT NULL,
+	`obr_h` smallint(5) unsigned DEFAULT NULL,
+	`p_lang` varchar(255) COLLATE utf8_czech_ci DEFAULT NULL,
+	`p_short` varchar(255) COLLATE utf8_czech_ci DEFAULT NULL,
+	`p_long` text COLLATE utf8_czech_ci,
+	PRIMARY KEY (`id`),
+	KEY `typ` (`typ`,`typ_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci COMMENT='kategorie pro kalendář nostalgie';
+
 CREATE TABLE `kalendar_vozidla` (
 	`id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
 	`jmeno` varchar(40) COLLATE utf8_czech_ci DEFAULT NULL,
