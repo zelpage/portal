@@ -4,7 +4,9 @@
 
 	require __DIR__ . '/../vendor/autoload.php';
 
+	use \Tracy\Debugger;
 	use \Nette\Configurator;
+	use \Nette\Database\Connection;
 
 	$isDevMachine = in_array(getenv('COMPUTERNAME'), [
 		'FORTEZZA',
@@ -32,5 +34,12 @@
 	$configurator->addConfig(__DIR__ . $configFile);
 
 	$container = $configurator->createContainer();
+
+	if ($isDevMachine) {
+		$connection = $container->getByType('Nette\Database\Connection');
+		$connection->onQuery[] = function(Connection $conn, $result) {
+			Debugger::log("SQL QUERY {$result->getQueryString()}");
+		};
+	}
 
 	return $container;
