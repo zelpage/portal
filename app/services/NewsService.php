@@ -27,7 +27,7 @@
 		/** @return News[] */
 		public function findLatestNews(): array {
 			$news = [];
-			foreach ($this->db->table('news')->order('datum_reverse DESC')->limit(5) as $row) {
+			foreach ($this->db->table('news')->order('datum_reverse ASC')->limit(5) as $row) {
 				$n = self::mapToNews($row);
 				$news[] = $n
 					->setAuthors($this->findNewsAuthors($n->getId()))
