@@ -21,6 +21,8 @@ database:
 
 services:
 	router: ZelPage\RouterFactory::createRouter
+	- ZelPage\UserService
+	- ZelPage\NewsService
 	- ZelPage\CalendarService
 	- ZelPage\OrganizerFormFactory
 	- ZelPage\VehicleFormFactory
