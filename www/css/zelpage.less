@@ -8,18 +8,44 @@ body {
 	div {
 		display: inline-block;
 		background-color: #009ece;
+		width: 24em;
+		height: 16em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		color: #ffffff;
-		margin: 1em 0;
+		transition: all 0.25s ease;
+		cursor: pointer;
 	}
 	input, button {
 		display: none;
 	}
 	label {
-		padding: 5em;
-		display: block;
-		cursor: pointer;
+		padding: 10em 6em;
+		cursor: inherit;
 	}
 	.box-uploading, .box-success, .box-error {
 		display: none;
+	}
+	
+	&.dragover div {
+		background-color: #00bfdf;
+	}
+	&.drop-enabled div {
+		outline: 1px dashed #ffffff;
+		outline-offset: -0.5em;
+	}
+}
+
+.image-uploader {
+	display: flex;
+	margin: 1em 0;
+	flex-wrap: wrap;
+	img {
+		height: 16em;
+		width: auto;
+		padding: 0.33em;
+		margin: 0 1em;
+		border: 1px solid #aaaaaa;
 	}
 }
