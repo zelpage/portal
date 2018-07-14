@@ -6,12 +6,12 @@
 
 	use \Nette\Configurator;
 
-	$isDevMachine = in_array(getenv('COMPUTERNAME'), array(
+	$isDevMachine = in_array(getenv('COMPUTERNAME'), [
 		'FORTEZZA',
 		'HUMBLEHORNET',
 		'HUNDERTHAF',
 		'MATOUSDANIELKA',
-	));
+	]);
 
 	$configurator = new Configurator;
 
