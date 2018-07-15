@@ -1,0 +1,31 @@
+{block title}Administrace Kalendáře akcí{/block}
+
+{block content}
+<h1>Jízdy</h1>
+
+<!--p>Filtr akcí {foreach $organizerTypes as $otId => $otName}<a href="{link Organizer:default $otId}">{$otName}</a>{sep}, {/sep}{/foreach} (<a href="{link Organizer:default}">vše</a>)</p-->
+
+<p><a href="{link Ride:new}">Přidat jízdu</a></p>
+
+{foreach $rides as $ride}
+{first}
+<table class="table table-sm table-hover">
+<thead class="thead-inverse">
+<tr>
+<th>#</th>
+<th>Datum, název, trasa</th>
+<th>&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+{/first}
+
+<tr>
+<td>{$ride->getId()}</td>
+<td><strong>{$ride->getFromDate()} - {$ride->getTillDate()}<br />{$ride->getName()}<br />{$ride->getRoute()}</strong></td>
+<td><a href="{link Ride:edit $ride->getId()}">Editovat</a> <a href="{link Ride:delete $ride->getId()}">Smazat</a></td>
+</tr>
+
+{last}</table>{/last}
+{/foreach}
+{/block}

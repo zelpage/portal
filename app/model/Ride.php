@@ -2,7 +2,7 @@
 
 	namespace ZelPage;
 
-	class Event {
+	class Ride {
 		/** @var null|int */
 		private $id;
 		/** @var null|string */
@@ -40,9 +40,9 @@
 		/** @var array */
 		private $tractions = [];
 		/** @var int */
-		private $type = 0;
+		private $eventType = 0;
 		/** @var array */
-		private $types = [];
+		private $eventTypes = [];
 		/** @var int */
 		private $fareType = 0;
 		/** @var array */
@@ -52,96 +52,85 @@
 		/** @var string */
 		private $seoUrl = "";
 		private $modified;
+        private $author;
 
 		public function getId() { return $this->id; }
-		public function setId($id) : Organizer { $this->id = $id; return $this; }
+		public function setId($id) : Ride { $this->id = $id; return $this; }
 
-		/** @return null|string */
-		public function getName() { return $this->name; }
-		public function setName(string $name) : Organizer { $this->name = $name; return $this; }
+        public function getIdCd() { return $this->idCd; }
+        public function hasIdCd() : bool { return empty($this->idCd) === FALSE; }
+        public function setIdCd($idCd) : Ride { $this->idCd = $idCd; return $this; }
 
-		public function getBrand() { return $this->brand; }
-		public function hasBrand() : bool { return empty($this->brand) === FALSE; }
-		public function setBrand($brand) : Organizer { $this->brand = $brand; return $this; }
+        public function getFromDate() { return $this->fromDate; }
+        public function hasFromDate() : bool { return empty($this->fromDate) === FALSE; }
+        public function setFromDate($fromDate) : Ride { $this->fromDate = $fromDate; return $this; }
 
-		public function getTaxId() { return $this->taxId; }
-		public function hasTaxId() : bool { return empty($this->taxId) === FALSE; }
-		public function setTaxId($taxId) : Organizer { $this->taxId = $taxId; return $this; }
+        public function getTillDate() { return $this->tillDate; }
+        public function hasTillDate() : bool { return empty($this->tillDate) === FALSE; }
+        public function setTillDate($tillDate) : Ride { $this->tillDate = $tillDate; return $this; }
 
-		public function getAddress() { return $this->address; }
-		public function hasAddress() : bool { return empty($this->address) === FALSE; }
-		public function setAddress($address) : Organizer { $this->address = $address; return $this; }
+        public function getName() { return $this->name; }
+        public function hasName() : bool { return empty($this->name) === FALSE; }
+        public function setName($name) : Ride { $this->name = $name; return $this; }
 
-		public function getDescription() { return $this->description; }
-		public function hasDescription() : bool { return empty($this->description) === FALSE; }
-		public function setDescription($description) : Organizer { $this->description = $description; return $this; }
+        public function getCoaches() { return $this->coaches; }
+        public function hasCoaches() : bool { return empty($this->coaches) === FALSE; }
+        public function setCoaches($coaches) : Ride { $this->coaches = $coaches; return $this; }
 
-		public function getPostOfficeBoxNumber() { return $this->postOfficeBoxNumber; }
-		public function hasPostOfficeBoxNumber() : bool { return empty($this->postOfficeBoxNumber) === FALSE; }
-		public function setPostOfficeBoxNumber($postOfficeBoxNumber) : Organizer { $this->postOfficeBoxNumber = $postOfficeBoxNumber; return $this; }
+        public function getDescriptionCz() { return $this->descriptionCz; }
+        public function hasDescriptionCz() : bool { return empty($this->descriptionCz) === FALSE; }
+        public function setDescriptionCz($descriptionCz) : Ride { $this->descriptionCz = $descriptionCz; return $this; }
 
-		public function getStreetAddress() { return $this->streetAddress; }
-		public function hasStreetAddress() : bool { return empty($this->streetAddress) === FALSE; }
-		public function setStreetAddress($streetAddress) : Organizer { $this->streetAddress = $streetAddress; return $this; }
+        public function getDescriptionSk() { return $this->descriptionSk; }
+        public function hasDescriptionSk() : bool { return empty($this->descriptionSk) === FALSE; }
+        public function setDescriptionSk($descriptionSk) : Ride { $this->descriptionSk = $descriptionSk; return $this; }
 
-		public function getPostalCode() { return $this->postalCode; }
-		public function hasPostalCode() { return empty($this->postalCode) === FALSE; }
-		public function setPostalCode($postalCode) : Organizer { $this->postalCode = $postalCode; return $this; }
+        public function getDescriptionDe() { return $this->descriptionDe; }
+        public function hasDescriptionDe() : bool { return empty($this->descriptionDe) === FALSE; }
+        public function setDescriptionDe($descriptionDe) : Ride { $this->descriptionDe = $descriptionDe; return $this; }
 
-		public function getAddressLocality() { return $this->addressLocality; }
-		public function hasAddressLocality() : bool { return empty($this->addressLocality) === FALSE; }
-		public function setAddressLocality($addressLocality) : Organizer { $this->addressLocality = $addressLocality; return $this; }
+        public function getDescriptionEn() { return $this->descriptionEn; }
+        public function hasDescriptionEn() : bool { return empty($this->descriptionEn) === FALSE; }
+        public function setDescriptionEn($descriptionEn) : Ride { $this->descriptionEn = $descriptionEn; return $this; }
 
-		public function getAddressCountry() { return $this->addressCountry; }
-		public function hasAddressCountry() : bool { return empty($this->addressCountry) === FALSE; }
-		public function setAddressCountry($addressCountry) : Organizer { $this->addressCountry = $addressCountry; return $this; }
+        public function getDescriptionPl() { return $this->descriptionPl; }
+        public function hasDescriptionPl() : bool { return empty($this->descriptionPl) === FALSE; }
+        public function setDescriptionPl($descriptionPl) : Ride { $this->descriptionPl = $descriptionPl; return $this; }
 
-		public function getPhone() { return $this->phone; }
-		public function hasPhone() : bool { return empty($this->phone) === FALSE; }
-		public function setPhone($phone) : Organizer { $this->phone = $phone; return $this; }
+        public function getRoute() { return $this->route; }
+        public function hasRoute() : bool { return empty($this->route) === FALSE; }
+        public function setRoute($route) : Ride { $this->route = $route; return $this; }
 
-		public function getFax() { return $this->fax; }
-		public function hasFax() : bool { return empty($this->fax) === FALSE; }
-		public function setFax($fax) : Organizer { $this->fax = $fax; return $this; }
+        public function getStatus() { return $this->status; }
+        public function hasStatus() : bool { return empty($this->status) === FALSE; }
+        public function setStatus($status) : Ride { $this->status = $status; return $this; }
 
-		public function getEmail() { return $this->email; }
-		public function hasEmail() : bool { return empty($this->email) === FALSE; }
-		public function setEmail($email) : Organizer { $this->email = $email; return $this; }
+        public function getTraction() { return $this->traction; }
+        public function hasTraction() : bool { return empty($this->traction) === FALSE; }
+        public function setTraction($traction) : Ride { $this->traction = $traction; return $this; }
 
-		public function getWww() { return $this->www; }
-		public function hasWww() : bool { return empty($this->www) === FALSE; }
-		public function setWww($www) : Organizer { $this->www = $www; return $this; }
+        public function getEventType() { return $this->eventType; }
+        public function hasEventType() : bool { return empty($this->eventType) === FALSE; }
+        public function setEventType($eventType) : Ride { $this->eventType = $eventType; return $this; }
 
-		public function getFacebook() { return $this->facebook; }
-		public function hasFacebook() : bool { return empty($this->facebook) === FALSE; }
-		public function setFacebook($facebook) : Organizer { $this->facebook = $facebook; return $this; }
+        public function getFareType() { return $this->fareType; }
+        public function hasFareType() : bool { return empty($this->fareType) === FALSE; }
+        public function setFareType($fareType) : Ride { $this->fareType = $fareType; return $this; }
 
-		public function getCarrierNumber() { return $this->carrierNumber; }
-		public function hasCarrierNumber() : bool { return empty($this->carrierNumber) === FALSE; }
-		public function setCarrierNumber($carrierNumber) : Organizer { $this->carrierNumber = $carrierNumber; return $this; }
+        public function getSeoUrl() { return $this->seoUrl; }
+        public function hasSeoUrl() : bool { return empty($this->seoUrl) === FALSE; }
+        public function setSeoUrl($seoUrl) : Ride { $this->seoUrl = $seoUrl; return $this; }
 
-		public function getFoundingDate() { return $this->foundingDate; }
-		public function hasFoundingDate() : bool { return empty($this->foundingDate) === FALSE; }
-		public function setFoundingDate($foundingDate) : Organizer { $this->foundingDate = $foundingDate; return $this; }
+        public function getActive() { return $this->active; }
+        public function hasActive() : bool { return empty($this->active) === FALSE; }
+        public function setActive($active) : Ride { $this->active = $active; return $this; }
 
-		public function getDissolutionDate() { return $this->dissolutionDate; }
-		public function hasDissolutionDate() : bool { return empty($this->dissolutionDate) === FALSE; }
-		public function setDissolutionDate($dissolutionDate) { $this->dissolutionDate = $dissolutionDate; return $this; }
+        public function getModified() { return $this->modified; }
+        public function hasModified() : bool { return empty($this->modified) === FALSE; }
+        public function setModified($modified) : Ride { $this->modified = $modified; return $this; }
 
-		public function getType() : int { return $this->type; }
-		public function setType(int $type) { $this->type = $type; return $this; }
-
-		public function getTypes() { return $this->types; }
-		public function setTypes($types) { $this->types = $types; return $this; }
-
-		public function isActive() { return $this->active; }
-		public function setActive($active) { $this->active = $active; return $this; }
-
-		public function getSeoUrl() : string { return $this->seoUrl; }
-		public function setSeoUrl(string $seoUrl) : Organizer { $this->seoUrl = $seoUrl; return $this; }
-
-		public function getModified() { return $this->modified; }
-		public function hasModified() : bool { return empty($this->modified) === FALSE; }
-		public function setModified($modified) : Organizer { $this->modified = $modified; return $this; }
+        public function getAuthor() { return $this->author; }
+        public function hasAuthor() : bool { return empty($this->author) === FALSE; }
+        public function setAuthor($author) : Ride { $this->author = $author; return $this; }
 
 	}

@@ -19,7 +19,7 @@
 			$this->addHidden('organizer_id');
 
 			$this->addText('jmeno', 'Název')
-				->setRequired('Vyplňte jméno pořadatele.');
+				->setRequired('Vyplňte název pořadatele.');
 			$this->addText('brand', 'Zkratka');
 			$this->addText('taxId', 'IČO');
 			$this->addTextarea('adr', 'Adresa')

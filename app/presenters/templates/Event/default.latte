@@ -1,0 +1,31 @@
+{block title}Administrace Kalendáře akcí{/block}
+
+{block content}
+<h1>Akce</h1>
+
+<!--p>Filtr akcí {foreach $organizerTypes as $otId => $otName}<a href="{link Organizer:default $otId}">{$otName}</a>{sep}, {/sep}{/foreach} (<a href="{link Organizer:default}">vše</a>)</p-->
+
+<p><a href="{link Event:new}">Přidat akci</a></p>
+
+{foreach $events as $event}
+{first}
+<table class="table table-sm table-hover">
+<thead class="thead-inverse">
+<tr>
+<th>#</th>
+<th>Datum, název, místo</th>
+<th>&nbsp;</th>
+</tr>
+</thead>
+<tbody>
+{/first}
+
+<tr>
+<td>{$event->getId()}</td>
+<td><strong>{$event->getFromDate()} - {$event->getTillDate()}<br />{$event->getName()}<br />{$event->getVenue()}</strong></td>
+<td><a href="{link Event:edit $event->getId()}">Editovat</a> <a href="{link Event:delete $event->getId()}">Smazat</a></td>
+</tr>
+
+{last}</table>{/last}
+{/foreach}
+{/block}
