@@ -25,19 +25,13 @@
 "Arial",
 "Helvetica",
 sans-serif;
+@c-font: "LatoWeb", "Arial", "Helvetica", sans-serif;
 @green: rgb(0, 155, 52);
 @primary: rgb(23, 158, 206);
 @purple: rgb(118, 92, 202);
-
-:root {
-
-    --c-font: "LatoWeb", "Arial", "Helvetica", sans-serif;
-    --primary: rgb(23, 158, 206);
-    --darker: rgb(0, 140, 195);
-    --purple: rgb(118, 92, 202);
-    --light: rgb(236, 245, 250);
-    --green: rgb(0, 155, 52);
-}
+@darker: rgb(0, 140, 195);
+@light: rgb(236, 245, 250);
+@white: rgb(255, 255, 255);
 
 body {
     margin: 0;
@@ -52,7 +46,7 @@ header,
     width: 940px;
     margin: 0 auto;
     font-size: 12px;
-    font-family: var(--c-font);
+    font-family: @c-font;
 }
 
 header {
@@ -61,7 +55,6 @@ header {
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
 
 nav {
     margin-bottom: 20px;
@@ -72,7 +65,7 @@ nav ul {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    font-family: var(--h-font);
+    font-family: @h-font;
     font-size: 1.2rem;
     text-transform: uppercase;
 
@@ -80,7 +73,7 @@ nav ul {
 
 nav ul a {
     text-decoration: none;
-    color: var(--primary);
+    color: @primary;
     font-weight: bold;
     -webkit-transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
     transition: all 600ms cubic-bezier(0.39, 0.575, 0.565, 1);
@@ -88,7 +81,7 @@ nav ul a {
 }
 
 nav ul a:hover {
-    color: var(--darker);
+    color: @darker;
 }
 
 nav li:not(:first-child) {
@@ -125,7 +118,7 @@ nav {
 h1,
 h2,
 h4 {
-    font-family: var(--h-font);
+    font-family: @h-font;
 }
 
 
@@ -138,31 +131,31 @@ h4 {
     }
 
     .headline {
-        background: linear-gradient(transparent, var(--primary) 20%);
+        background: linear-gradient(transparent, @primary 20%);
         padding: 20px 10px 10px 15px;
         margin-top: -50px;
         z-index: 0;
         position: relative;
         border: 0;
-        color: #ffffff;
+        color: @white;
 
         h2 {
             font-size: 1.5rem;
 
             a {
-                color: #ffffff;
+                color: @white;
                 text-decoration: none;
                 transition: all 0.3s;
             }
 
             a:hover {
-                color: var(--light);
+                color: @light;
             }
 
         }
 
         p {
-            font-family: var(--c-font);
+            font-family: @c-font;
             font-size: 1rem;
             line-height: 1.3;
         }
@@ -196,11 +189,11 @@ h4 {
             font-size: 1.2em;
             margin: 5px 0 5px 0;
             font-weight: 100;
-            font-family: var(--c-font);
+            font-family: @c-font;
         }
 
         li:not(:last-child) {
-            border-bottom: 2px solid var(--primary);
+            border-bottom: 2px solid @primary;
         }
         li a {
             text-decoration: none;
@@ -208,7 +201,7 @@ h4 {
             transition: all 0.3s;
         }
         li a:hover {
-            color: var(--primary);
+            color: @primary;
         }
 
         li img {
@@ -217,60 +210,57 @@ h4 {
     }
 }
 
-.more, .more a {
+.more {
+	display: block;
+	flex-basis: 100%;
     text-transform: uppercase;
-    width: 460px;
     padding: 10px 0 10px 0;
-    border: 2px solid var(--green);
+    border: 2px solid @green;
     text-decoration: none;
-    margin-bottom: 10px;
+    margin: 20px 0;
     text-align: center;
-    background: var(--green);
-    cursor: pointer;
+    background: @green;
     transition: all 0.3s;
-    color: #ffffff;
+    color: @white;
     font-size: 0.9rem;
-    font-family: var(--c-font);
+    font-family: @c-font;
     font-weight: bolder;
 }
 
 .more:hover {
-    background-color: #ffffff;
-    
-}
-
-.more a:hover {
-    border: 0;
+    background-color: @white;
+    color: @green;
 }
 
 .buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
-    button {
-        width: 140px;
+	padding-bottom: 0.2em;
+    a {
+        flex-basis: 31%;
         padding: 10px 0 10px 0;
         cursor: pointer;
-        font-family: var(--c-font);
+        font-family: @c-font;
         text-transform: uppercase;
+		text-align: center;
     }    
 }
 
 .buttons .add-message {
-    border: 2px solid var(--darker);
-    color: var(--darker);
+    border: 2px solid @darker;
+    color: @darker;
     text-decoration: none;
-    background: #ffffff;
+    background: @white;
     font-weight: bolder;
     transition: all 0.3s;
 }
 
 .add-photo {
-    border: 2px solid var(--primary);
-    color: var(--primary);
+    border: 2px solid @primary;
+    color: @primary;
     text-decoration: none;
-    background: #ffffff;
+    background: @white;
     font-weight: bolder;
     transition: all 0.3s;
     
@@ -281,10 +271,10 @@ h4 {
 }
 
 .add-video {
-    border: 2px solid var(--purple);
-    color: var(--purple);
+    border: 2px solid @purple;
+    color: @purple;
     text-decoration: none;
-    background: #ffffff;
+    background: @white;
     font-weight: bolder;
     transition: all 0.3s;
     
@@ -296,24 +286,24 @@ h4 {
 }
 
 .add-message:hover {
-    color: #ffffff;
-    background: var(--primary);
+    color: @white;
+    background: @primary;
 }
 
 .add-photo:hover {
-    color: #ffffff;
-    background: var(--darker);
+    color: @white;
+    background: @darker;
 }
 
 .add-video:hover {
-    color: #ffffff;
-    background: var(--purple);
+    color: @white;
+    background: @purple;
 }
 
 .button-section {
-    background: linear-gradient(transparent, #ffffff 20%);
+    background: linear-gradient(transparent, @white 20%);
     padding-top: 30px;
-    margin-top: -122px;
+    margin-top: -150px;
     position: relative;
     z-index: 0;
 }
@@ -354,54 +344,45 @@ h4 {
             
         }
         
-}
+	}
 
-    .headline {
-        background: linear-gradient(transparent, var(--primary) 20%);
-        padding: 20px 10px 10px 15px;
-        margin-top: -50px;
-        z-index: 0;
-        position: relative;
-        border: 0;
-        color: #ffffff;
+	.headline {
+		background: linear-gradient(transparent, @primary 20%);
+		padding: 20px 10px 10px 15px;
+		margin-top: -50px;
+		z-index: 0;
+		position: relative;
+		border: 0;
+		color: @white;
 
-        h2 {
-            font-size: 1.5rem;
+		h2 {
+			font-size: 1.5rem;
 
-            a {
-                color: #ffffff;
-                text-decoration: none;
-                transition: all 0.3s;
-            }
+			a {
+				color: @white;
+				text-decoration: none;
+				transition: all 0.3s;
+			}
 
-            a:hover {
-                color: var(--light);
-            }
+			a:hover {
+				color: @light;
+			}
 
-        }
-    
-    
-}
+		}
 
 
-
-
-
-
-
-
-
-
+	}
+	
 }
 
 
 .gallery {
-    background-color: var(--darker);
+    background-color: @darker;
     margin: 0;
     padding: 20px;
 
     h2 {
-        color: #ffffff;
+        color: @white;
         text-transform: uppercase;
         font-size: 1.1rem;
         letter-spacing: 0.9px;
@@ -436,7 +417,7 @@ h4 {
 
 
 footer {
-    background: var(--light);
+    background: @light;
     padding: 35px 0 35px 0;
     display: flex;
     flex-direction: row;
