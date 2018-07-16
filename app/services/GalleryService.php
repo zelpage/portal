@@ -20,9 +20,9 @@
 		}
 
 		/** @return GalleryPicture[] */
-		public function getLatestPictures(): array {
+		public function getLatestPictures($limit = 10): array {
 			$pictures = [];
-			foreach ($this->db->table('fotogalerie')->where('typ', 'pic')->where('zobrazit', 'y')->where('date_p_reverse >= ?', 2051218800 - strtotime(date('Y-m-d H:i:00')))->order('date_p_reverse ASC')->limit(10) as $row) {
+			foreach ($this->db->table('fotogalerie')->where('typ', 'pic')->where('zobrazit', 'y')->where('date_p_reverse >= ?', 2051218800 - strtotime(date('Y-m-d H:i:00')))->order('date_p_reverse ASC')->limit($limit) as $row) {
 				$picture = self::mapToPicture($row);
 				$pictures[] = $picture
 					->setAuthor($this->userService->findUserByID($picture->getAuthor()->getId()))
