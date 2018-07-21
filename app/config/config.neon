@@ -20,9 +20,9 @@ database:
 
 services:
 	router: ZelPage\RouterFactory::createRouter
-	- ZelPage\UserService
-	- ZelPage\NewsService
-	- ZelPage\GalleryService
-	- ZelPage\CalendarService
-	- ZelPage\OrganizerFormFactory
-	- ZelPage\VehicleFormFactory
+	userService: ZelPage\UserService
+	newsService: ZelPage\NewsService
+	galleryService: ZelPage\GalleryService
+	calendarService: ZelPage\CalendarService
+	organizerFormFactory: ZelPage\OrganizerFormFactory
+	vehicleFormFactory: ZelPage\VehicleFormFactory
