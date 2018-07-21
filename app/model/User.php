@@ -8,6 +8,10 @@
 		/** @var null|string */
 		private $login;
 		/** @var null|string */
+		private $password;
+		/** @var bool */
+		private $migratedFromMD5 = FALSE;
+		/** @var null|string */
 		private $name;
 		/** @var null|string */
 		private $abbr;
@@ -27,6 +31,20 @@
 
 		public function setLogin(?string $login): User {
 			$this->login = $login;
+			return $this;
+		}
+
+		public function getPassword(): ?string { return $this->password; }
+
+		public function setPassword(string $password): User {
+			$this->password = $password;
+			return $this;
+		}
+
+		public function isMigratedFromMD5(): bool { return $this->migratedFromMD5; }
+
+		public function setMigratedFromMD5(bool $migratedFromMD5): User {
+			$this->migratedFromMD5 = $migratedFromMD5;
 			return $this;
 		}
 
