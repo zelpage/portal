@@ -6,7 +6,7 @@
 	use \Nette\Utils\ArrayHash;
 	use \Nette\Application\UI\Form;
 
-	class VehicleFormFactory {
+	class VehicleFormFactory extends AnyFormFactory {
 		use SmartObject;
 
 		/** @var CalendarService */
@@ -17,7 +17,7 @@
 		}
 
 		public function create(callable $onVehicleSaved, array $vehicleTypes, array $defaults): Form {
-			$form = new Form;
+			$form = $this->createForm();
 
 			$form->addGroup('Údaje o vozidle');
 			$form->addHidden('vehicle_id');
