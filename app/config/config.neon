@@ -6,7 +6,7 @@ application:
 		*: ZelPage\*Presenter
 
 session:
-	expiration: 14 days
+	expiration: 30 days
 
 extensions:
 	env: wodCZ\NetteDotenv\DotEnvExtension
@@ -20,9 +20,11 @@ database:
 
 services:
 	router: ZelPage\RouterFactory::createRouter
+	authenticator: ZelPage\AuthenticationService
 	userService: ZelPage\UserService
 	newsService: ZelPage\NewsService
 	galleryService: ZelPage\GalleryService
 	calendarService: ZelPage\CalendarService
 	organizerFormFactory: ZelPage\OrganizerFormFactory
+	signInFormFactory: ZelPage\SignInFormFactory
 	vehicleFormFactory: ZelPage\VehicleFormFactory

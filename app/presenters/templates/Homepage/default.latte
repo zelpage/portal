@@ -1,4 +1,9 @@
 {block content}
 	<p>Default</p>
-	<a n:href=":addNews">Try file upload</a>
+	{if $user->isLoggedIn()}
+		<p><a n:href=":signout">Sign out</a></p>
+	{else}
+		{control signInForm}
+	{/if}	
+	<p><a n:href=":addNews">Try file upload</a></p>
 {/block}
