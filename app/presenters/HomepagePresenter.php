@@ -6,6 +6,8 @@
 
 	class HomepagePresenter extends BasePresenter {
 
+		/** @var UserService */
+		private $userService;
 		/** @var NewsService */
 		private $newsService;
 		/** @var GalleryService */
@@ -17,11 +19,13 @@
 		private $pictures = [];
 
 		public function __construct(
+			UserService $userService,
 			NewsService $newsService,
 			GalleryService $galleryService
 		) {
 			parent::__construct();
 
+			$this->userService = $userService;
 			$this->newsService = $newsService;
 			$this->galleryService = $galleryService;
 		}
@@ -32,6 +36,7 @@
 
 			Debugger::barDump($this->news);
 			Debugger::barDump($this->pictures);
+			Debugger::barDump($this->userService->findGroups());
 		}
 
 	}

@@ -1,3 +1,22 @@
+CREATE TABLE `groups` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL COLLATE utf8_czech_ci COMMENT 'Group name',
+  `comment` text NOT NULL COLLATE utf8_czech_ci COMMENT 'Group description',
+  `id_forum` mediumint(8) unsigned NULL DEFAULT 0 COMMENT 'id na diskusním fóru ŽelPage',
+  `slack` varchar(255) NULL DEFAULT NULL COLLATE utf8_czech_ci COMMENT 'Slack webhook',
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`,`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci COMMENT='uživatelské skupiny';
+
+CREATE TABLE `group_layers` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `id_group` int(2) NOT NULL DEFAULT 0,
+  `nadpis` varchar(100) NOT NULL COLLATE utf8_czech_ci,
+  `uroven` int(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `id_group` (`id_group`,`uroven`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
 CREATE TABLE `kalendar_spolky` (
 	`id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
 	`jmeno` varchar(100) COLLATE utf8_czech_ci DEFAULT NULL COMMENT 'název',
