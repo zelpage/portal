@@ -9,6 +9,7 @@
 	use \Nette\Security\Passwords;
 	use \Nette\Security\IAuthenticator;
 	use \Nette\Security\AuthenticationException;
+	use \Tracy\Debugger;
 
 	class AuthenticationService implements IAuthenticator {
 		use SmartObject;
@@ -28,7 +29,7 @@
 			[$username, $password] = $credentials;
 
 			$user = $this->userService->findUserByUsername($username);
-			\Nette\Diagnostics\Debugger::barDump($user);
+			Debugger::barDump($user);
 
 			if (is_null($user)) {
 				throw new AuthenticationException('User does not exist.', self::IDENTITY_NOT_FOUND);

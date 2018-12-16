@@ -19,7 +19,10 @@
 			$this->userService = $userService;
 		}
 
-		/** @return GalleryPicture[] */
+		/**
+		 * @param int $limit
+		 * @return GalleryPicture[]
+		 */
 		public function getLatestPictures(int $limit = 10): array {
 			$pictures = [];
 			foreach ($this->db->table('fotogalerie')->where('typ', 'pic')->where('zobrazit', 'y')->where('date_p_reverse >= ?', 2051218800 - strtotime(date('Y-m-d H:i:00')))->order('date_p_reverse ASC')->limit($limit) as $row) {
@@ -46,7 +49,8 @@
 			if (empty($row->note) === FALSE) { $p->setNote($row->note); }
 			if (empty($row->hodn_y) === FALSE) { $p->setPointsPositive($row->hodn_y); }
 			if (empty($row->hodn_n) === FALSE) { $p->setPointsNegative($row->hodn_n); }
-			if (empty($row->hodn_user) === FALSE) { // TODO
+			if (empty($row->hodn_user) === FALSE) {
+				// TODO
 			}
 			if (empty($row->zobrazit) === FALSE) { $p->setPublished($row->zobrazit); }
 			if (empty($row->hodnoceni) === FALSE) { $p->setRatingAllowed($row->hodnoceni); }

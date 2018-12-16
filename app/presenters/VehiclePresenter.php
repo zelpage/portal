@@ -3,21 +3,28 @@
 	namespace ZelPage;
 
 	use \Nette\Application\UI\Form;
+	use \Nette\InvalidArgumentException;
 
 	class VehiclePresenter extends BasePresenter {
 
+		/** @var null|Vehicle */
 		private $vehicle;
-		private $vehicleTypes;
+		/** @var Vehicle[] */
+		private $vehicles = [];
+		/** @var string[] */
+		private $vehicleTypes = [];
 
 		/** @var CalendarService */
 		private $calendarService;
 		/** @var VehicleFormFactory */
 		private $vehicleFormFactory;
 
-		/** @var Vehicle[] */
-		private $vehicles = [];
+		public function __construct(
+			CalendarService $calendarService,
+			VehicleFormFactory $vehicleFormFactory
+		) {
+			parent::__construct();
 
-		public function __construct(CalendarService $calendarService, VehicleFormFactory $vehicleFormFactory) {
 			$this->calendarService = $calendarService;
 			$this->vehicleFormFactory = $vehicleFormFactory;
 		}

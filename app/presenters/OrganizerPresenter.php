@@ -2,12 +2,12 @@
 
 	namespace ZelPage;
 
-	use \ZelPage\BasePresenter;
 	use \Nette\InvalidArgumentException;
 
 	class OrganizerPresenter extends BasePresenter {
 
-		private $organizerTypes;
+		/** @var string[] */
+		private $organizerTypes = [];
 
 		/** @var null|Organizer */
 		private $organizer = NULL;
@@ -19,7 +19,12 @@
 		/** @var OrganizerFormFactory */
 		private $organizerFormFactory;
 
-		public function __construct(CalendarService $calendarService, OrganizerFormFactory $organizerFormFactory) {
+		public function __construct(
+			CalendarService $calendarService,
+			OrganizerFormFactory $organizerFormFactory
+		) {
+			parent::__construct();
+
 			$this->calendarService = $calendarService;
 			$this->organizerFormFactory = $organizerFormFactory;
 		}

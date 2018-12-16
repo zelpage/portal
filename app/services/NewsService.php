@@ -24,7 +24,10 @@
 			return ($row === FALSE) ? NULL : self::mapToCategory($row);
 		}
 
-		/** @return News[] */
+		/**
+		 * @param int $limit
+		 * @return News[]
+		 */
 		public function findLatestNews(int $limit = 10): array {
 			$news = [];
 			foreach ($this->db->table('news')->order('datum_reverse ASC')->limit($limit) as $row) {

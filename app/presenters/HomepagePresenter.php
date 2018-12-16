@@ -16,7 +16,12 @@
 		/** @var GalleryPicture[] */
 		private $pictures = [];
 
-		public function __construct(NewsService $newsService, GalleryService $galleryService) {
+		public function __construct(
+			NewsService $newsService,
+			GalleryService $galleryService
+		) {
+			parent::__construct();
+
 			$this->newsService = $newsService;
 			$this->galleryService = $galleryService;
 		}

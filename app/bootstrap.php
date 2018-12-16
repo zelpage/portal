@@ -4,9 +4,12 @@
 
 	require __DIR__ . '/../vendor/autoload.php';
 
+	use \Nette\Database\DriverException;
+	use \Nette\Database\ResultSet;
 	use \Tracy\Debugger;
 	use \Nette\Configurator;
 	use \Nette\Database\Connection;
+	use \Tracy\ILogger;
 
 	$isDevMachine = in_array(getenv('COMPUTERNAME'), [
 		'FORTEZZA',
@@ -38,7 +41,12 @@
 	if ($isDevMachine) {
 		$connection = $container->getByType('Nette\Database\Connection');
 		$connection->onQuery[] = function(Connection $conn, $result) {
-			Debugger::log("SQL QUERY {$result->getQueryString()}");
+			if ($result instanceof ResultSet) {
+				Debugger::log("SQL QUERY {$result->getQueryString()}");
+			}
+			else if ($result instanceof DriverException) {
+				Debugger::log("SQL ERROR {$result->getDriverCode()} {$result->getSqlState()} {$result->getMessage()} QUERY {$result->getQueryString()}", ILogger::ERROR);
+			}
 		};
 	}
 
