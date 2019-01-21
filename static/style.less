@@ -16,7 +16,7 @@
 @darker: rgb(0, 140, 195);
 @light: rgb(236, 245, 250);
 @white: rgb(255, 255, 255);
-@black: #000000;
+@black: rgb(31,16,26);
 
 body {
     margin: 0;
@@ -72,12 +72,15 @@ header {
             flex-direction: row;
             flex-wrap: nowrap;
             justify-content: center;
+            align-items: center;
         }
 
         li {
             display: flex;
             flex-direction: column;
             justify-content: center;
+            height: 35px;
+            
             padding: 0 2px;
             font-weight: 700;
             -webkit-transition: all 50ms ease-in-out;
@@ -228,11 +231,12 @@ h4 {
     flex-basis: 100%;
     text-transform: uppercase;
     padding: 10px 0 10px 0;
-    border: 2px solid @green;
+    border: 2px solid @darker;
+    letter-spacing: 1.5px;
     text-decoration: none;
     margin: 20px 0;
     text-align: center;
-    background: @green;
+    background: @darker;
     transition: all 0.3s;
     color: @white;
     font-size: 0.9rem;
@@ -242,7 +246,7 @@ h4 {
 
 .more:hover {
     background-color: @white;
-    color: @green;
+    color: @darker;
 }
 
 .buttons {
