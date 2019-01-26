@@ -393,12 +393,14 @@ h4 {
 
 
 .gallery {
-    background-color: @darker;
+    background-color: @white;
+    border-top: 2px solid @darker;
+    border-bottom: 2px solid @darker;
     margin: 0;
     padding: 20px;
 
     h2 {
-        color: @white;
+        color: @darker;
         text-transform: uppercase;
         font-size: 1.1rem;
         letter-spacing: 0.9px;
@@ -427,27 +429,54 @@ h4 {
 
 
 #carousel {
-    overflow: hidden;
+    overflow-x: scroll;
     position: relative;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
 }
 
 
 footer {
     background: @light;
-    padding: 35px 0 35px 0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    padding: 40px 0 40px 0;
+    font-size: 1rem;
 
+    p {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+
+        a {
+            color: @black;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    // Are we gonna delete this?
     .toplist {
         width: 88px;
         height: 120px;
         background-color: grey;
     }
 
-    div {
-        width: 300px;
+    .follow-us {
+        font-size: 0.9rem;
+        margin-top: 20px;
+
+        img {
+            vertical-align: middle;
+            margin: 0 10px 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: @black;
+        }
     }
 
 }
